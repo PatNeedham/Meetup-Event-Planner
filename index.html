@@ -35,5 +35,41 @@
 			</div>
 		</div>
 	</body>
+	<script type="text/javascript">
+		var su_submit = document.querySelector('#su_submit');
+		su_submit.onclick = function () {
+			var usernameFeedback = "";
+			var passwordFeedback = "";
+			var name = document.querySelector('#su_name');
+			var email = document.querySelector('#su_email');
+			var username = document.querySelector('#su_username');
+			var password = document.querySelector('#su_password');
+			var employer = document.querySelector('#su_employer');
+
+			if (username.value.length < 4) {
+				alert("got here");
+				usernameFeedback = "Not enough characters";
+			}
+			username.setCustomValidity(usernameFeedback);
+			if (password.value.length < 8) {
+				passwordFeedback = "Not enough characters";
+			}
+			if (/\d/.test(password.value) == false) {
+				passwordFeedback += "\nMust include a number";
+			}
+			password.setCustomValidity(passwordFeedback);
+		}
+	</script>
+	<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+	<script>
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyDsCCRNq2uC4adLBD6viYMTxS2KwfSMw9w",
+	    authDomain: "eventer-5070a.firebaseapp.com",
+	    databaseURL: "https://eventer-5070a.firebaseio.com",
+	    storageBucket: "eventer-5070a.appspot.com",
+	  };
+	  firebase.initializeApp(config);
+	</script>
 </html>
 
