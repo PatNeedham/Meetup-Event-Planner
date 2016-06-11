@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<title>Eventer</title>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<style>
+			input {
+				margin-top: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<h1 class="cent">Welcome to Eventer</h1>
+				<h2 class="cent">Please sign in or create an account</h2>
+				<div class="col-md-6">
+					<h1>Sign Up</h1>
+					<form id="signup_form">
+						<input type="text" id="su_name" placeholder="Name" autofocus required><br/>
+						<input type="email" id="su_email" placeholder="Email Address" required><br/>
+						<input type="text" id="su_username" placeholder="Username" required> (Minimum of 4 alphanumeric characters)<br/>
+						<input type="password" id="su_password" placeholder="Password" required> (Must contain at least 8 characters including a number)<br/>
+						<input type="text" id="su_employer" placeholder="(Optional) Employer"><br/>
+						<input type="submit" id="su_submit" value="Submit">
+					</form>
+				</div>
+				<div class="col-md-6">
+					<h1>Log In</h1>
+					<form id="login_form">
+						<input type="text" id="li_username" placeholder="Username" required><br/>
+						<input type="password" id="li_password" placeholder="Password" required><br/>
+						<input type="submit" id="li_submit" value="Submit">
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
