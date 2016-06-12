@@ -6,70 +6,58 @@
 			input {
 				margin-top: 5px;
 			}
+			.cent {
+			    margin: auto;
+			    width: 40%;
+			    padding: 10px;
+			}
 		</style>
 	</head>
 	<body>
 		<div class="container-fluid">
-			<div class="row">
-				<h1 class="cent">Welcome to Eventer</h1>
-				<h2 class="cent">Please sign in or create an account</h2>
+			<h1 class="cent">Welcome to Eventer</h1>
+			<div class="row" id="loginSignup">
+				<h2 class="cent" id="pleaseSignIn">Please sign in or create an account</h2>
 				<div class="col-md-6">
 					<h1>Sign Up</h1>
-					<form id="signup_form">
-						<input type="text" id="su_name" placeholder="Name" autofocus required><br/>
-						<input type="email" id="su_email" placeholder="Email Address" required><br/>
-						<input type="text" id="su_username" placeholder="Username" required> (Minimum of 4 alphanumeric characters)<br/>
-						<input type="password" id="su_password" placeholder="Password" required> (Must contain at least 8 characters including a number)<br/>
-						<input type="text" id="su_employer" placeholder="(Optional) Employer"><br/>
-						<input type="submit" id="su_submit" value="Submit">
+					<form id="signup_form" action="#" autocomplete="on">
+						<input class=".form-control" type="text" id="su_name" placeholder="Name" autofocus required><br/>
+						<input class=".form-control" type="email" id="su_email" placeholder="Email Address" required><br/>
+						<input class=".form-control" type="password" id="su_password" placeholder="Password" required> (Must contain at least 8 characters including a number)<br/>
+						<input class=".form-control" type="text" id="su_employer" placeholder="(Optional) Employer"><br/>
+						<input class="btn btn-primary" type="submit" id="su_submit" value="Submit">
 					</form>
 				</div>
 				<div class="col-md-6">
 					<h1>Log In</h1>
-					<form id="login_form">
-						<input type="text" id="li_username" placeholder="Username" required><br/>
-						<input type="password" id="li_password" placeholder="Password" required><br/>
-						<input type="submit" id="li_submit" value="Submit">
+					<form id="login_form" action="#">
+						<p id="error_messages"></p>
+						<input class=".form-control" type="email" id="li_email" placeholder="Email" required><br/>
+						<input class=".form-control" type="password" id="li_password" placeholder="Password" required><br/>
+						<input class="btn btn-primary" type="submit" id="li_submit" value="Submit"><br/>
+						(Use sample account with email test@example.com, password "t3stt3st")
 					</form>
+				</div>
+			</div>
+			<div class="row" id="events" style="display: none;">
+				<div class="col-md-6">
+					<h1>Create an Event</h1>
+					<form autocomplete="on">
+						<input class=".form-control" type="text" id="eventName" placeholder="Event Name" required /><br/>
+						<input class=".form-control" type="text" id="eventLocation" placeholder="Host Locaton" required /><br/>
+						Start Time: <input type="datetime-local" id="startTime" required /><br/>
+						End Time: <input type="datetime-local" id="endTime" required /><br/>
+						<input class=".form-control" type="textarea" id="descriptions" placeholder="Description (Optional)" /><br/>
+						<input class="btn btn-primary" type="submit" id="eventSubmit" value="Submit">
+					</form>
+				</div>
+				<div class="col-md-6">
+					<h1>Your Events</h1>
 				</div>
 			</div>
 		</div>
 	</body>
-	<script type="text/javascript">
-		var su_submit = document.querySelector('#su_submit');
-		su_submit.onclick = function () {
-			var usernameFeedback = "";
-			var passwordFeedback = "";
-			var name = document.querySelector('#su_name');
-			var email = document.querySelector('#su_email');
-			var username = document.querySelector('#su_username');
-			var password = document.querySelector('#su_password');
-			var employer = document.querySelector('#su_employer');
-
-			if (username.value.length < 4) {
-				alert("got here");
-				usernameFeedback = "Not enough characters";
-			}
-			username.setCustomValidity(usernameFeedback);
-			if (password.value.length < 8) {
-				passwordFeedback = "Not enough characters";
-			}
-			if (/\d/.test(password.value) == false) {
-				passwordFeedback += "\nMust include a number";
-			}
-			password.setCustomValidity(passwordFeedback);
-		}
-	</script>
-	<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-	<script>
-	  // Initialize Firebase
-	  var config = {
-	    apiKey: "AIzaSyDsCCRNq2uC4adLBD6viYMTxS2KwfSMw9w",
-	    authDomain: "eventer-5070a.firebaseapp.com",
-	    databaseURL: "https://eventer-5070a.firebaseio.com",
-	    storageBucket: "eventer-5070a.appspot.com",
-	  };
-	  firebase.initializeApp(config);
-	</script>
+	
+	<script src="app.js"></script>
 </html>
 
