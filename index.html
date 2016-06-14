@@ -2,6 +2,7 @@
 	<head>
 		<title>Eventer</title>
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 		<style>
 			input {
 				margin-top: 5px;
@@ -10,6 +11,10 @@
 			    margin: auto;
 			    width: 40%;
 			    padding: 10px;
+			}
+
+			#locationField {
+				margin-bottom: 25px;
 			}
 		</style>
 	</head>
@@ -20,7 +25,7 @@
 				<h2 class="cent" id="pleaseSignIn">Please sign in or create an account</h2>
 				<div class="col-md-6">
 					<h1>Sign Up</h1>
-					<form id="signup_form" action="#" autocomplete="on">
+					<form id="signup_form" autocomplete="on">
 						<input class=".form-control" type="text" id="su_name" placeholder="Name" autofocus required><br/>
 						<input class=".form-control" type="email" id="su_email" placeholder="Email Address" required><br/>
 						<input class=".form-control" type="password" id="su_password" placeholder="Password" required> (Must contain at least 8 characters including a number)<br/>
@@ -40,24 +45,105 @@
 				</div>
 			</div>
 			<div class="row" id="events" style="display: none;">
+				<button type="button" id="logoutButton" class="btn btn-default btn-sm">
+					<span class="glyphicon glyphicon-log-out"></span> Log out
+		        </button>
 				<div class="col-md-6">
 					<h1>Create an Event</h1>
-					<form autocomplete="on">
-						<input class=".form-control" type="text" id="eventName" placeholder="Event Name" required /><br/>
-						<input class=".form-control" type="text" id="eventLocation" placeholder="Host Locaton" required /><br/>
-						Start Time: <input type="datetime-local" id="startTime" required /><br/>
-						End Time: <input type="datetime-local" id="endTime" required /><br/>
-						<input class=".form-control" type="textarea" id="descriptions" placeholder="Description (Optional)" /><br/>
+					<form>
+						<input class="form-control" type="text" id="eventName" placeholder="Event Name" required /><br/>
+						<input class="form-control" type="text" id="eventType" placeholder="Type of event" required><br/>
+						<input class="form-control" type="text" id="eventHost" placeholder="Event Host" required><br/>
+						Start Time: <input class="form-control" type="datetime-local" id="startTime" required /><br/>
+						End Time: <input class="form-control" type="datetime-local" id="endTime" required /><br/>
+						<input class="form-control" type="text" id="guestList" placeholder="Guest List" required><br/>
+						<div id="locationField">
+							<input class="form-control" id="autocomplete" placeholder="Location"
+								onFocus="geolocate()" type="text"></input>
+						</div>
+						<input class="form-control" type="textarea" id="message" placeholder="Message to Guests (Optional)" /><br/>
 						<input class="btn btn-primary" type="submit" id="eventSubmit" value="Submit">
 					</form>
 				</div>
 				<div class="col-md-6">
 					<h1>Your Events</h1>
+					<div id="eventsToAdd">
+					</div>
 				</div>
 			</div>
 		</div>
 	</body>
 	
 	<script src="app.js"></script>
+	<script>
+      // This example displays an address form, using the autocomplete feature
+      // of the Google Places API to help users fill in the information.
+
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+      var placeSearch, autocomplete;
+      var componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'short_name'
+      };
+
+      function initAutocomplete() {
+        // Create the autocomplete object, restricting the search to geographical
+        // location types.
+        autocomplete = new google.maps.places.Autocomplete(
+            /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+            {types: ['geocode']});
+
+        // When the user selects an address from the dropdown, populate the address
+        // fields in the form.
+        autocomplete.addListener('place_changed', fillInAddress);
+      }
+
+      function fillInAddress() {
+        // Get the place details from the autocomplete object.
+        var place = autocomplete.getPlace();
+
+        for (var component in componentForm) {
+          document.getElementById(component).value = '';
+          document.getElementById(component).disabled = false;
+        }
+
+        // Get each component of the address from the place details
+        // and fill the corresponding field on the form.
+        for (var i = 0; i < place.address_components.length; i++) {
+          var addressType = place.address_components[i].types[0];
+          if (componentForm[addressType]) {
+            var val = place.address_components[i][componentForm[addressType]];
+            document.getElementById(addressType).value = val;
+          }
+        }
+      }
+
+      // Bias the autocomplete object to the user's geographical location,
+      // as supplied by the browser's 'navigator.geolocation' object.
+      function geolocate() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var geolocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            var circle = new google.maps.Circle({
+              center: geolocation,
+              radius: position.coords.accuracy
+            });
+            autocomplete.setBounds(circle.getBounds());
+          });
+        }
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALyDL4nBNkMJ44_YYu6Zw_EDWx4Z3ss40&libraries=places&callback=initAutocomplete"
+        async defer></script>
 </html>
 

@@ -1,0 +1,22 @@
+{
+  "name": "meetup-event-planner",
+  "version": "1.0.0",
+  "description": "For Udacity's Senior Web Developer Nanodegree Project 1",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PatNeedham/Meetup-Event-Planner.git"
+  },
+  "author": "Pat Needham",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PatNeedham/Meetup-Event-Planner/issues"
+  },
+  "homepage": "https://github.com/PatNeedham/Meetup-Event-Planner#readme",
+  "dependencies": {
+    "gulp": "^3.9.1"
+  }
+}
