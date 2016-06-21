@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/PatNeedham/Meetup-Event-Planner#readme",
   "dependencies": {
-    "gulp": "^3.9.1"
+    "browserify": "^13.0.1",
+    "gulp": "^3.9.1",
+    "gulp-uglify": "^1.5.3",
+    "run-sequence": "^1.2.1",
+    "watchify": "^3.7.0"
   }
 }
