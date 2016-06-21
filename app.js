@@ -8,7 +8,6 @@ su_submit.onclick = function() {
 	var nameValid = false;
 	if (name != null && name.value != "") {
 		nameValid = true;
-		alert("got ehre " + name.value);
 	}
 
 	if (password == null || password.value.length < 8) {
