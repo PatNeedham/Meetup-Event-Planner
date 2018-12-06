@@ -1,4 +1,7 @@
 # Project 1: Meet-Up Event Planner
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/PatNeedham/Meetup-Event-Planner.svg)](https://greenkeeper.io/)
+
 ### For Udacity Senior Web Developer Nanodegree
 
 ## Project Name: Eventer
